@@ -22,28 +22,24 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useToast } from "@/hooks/use-toast";
-
 const formSchema = z.object({
   dateTime: z.date(),
 });
 
 type FormSchemaType = z.infer<typeof formSchema>;
 
-export function DateTimePickerForm() {
-  const { toast } = useToast();
+type DateTimePickerFormProps = {
+  onDateChange: (selectedDate: Date | null) => void;
+};
+
+export function DateTimePickerForm({ onDateChange }: DateTimePickerFormProps) {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
   });
+
   function onSubmit(data: FormSchemaType) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre>
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+    console.log("Form submitted with:", data);
+    onDateChange(data.dateTime);
   }
 
   return (
@@ -83,12 +79,18 @@ export function DateTimePickerForm() {
                   <Calendar
                     mode="single"
                     selected={field.value}
-                    onSelect={field.onChange}
+                    onSelect={(selected) => {
+                      console.log("Calendar date selected:", selected);
+                      field.onChange(selected);
+                    }}
                     initialFocus
                   />
                   <div className="p-3 border-t border-border">
                     <TimePickerDemo
-                      setDate={field.onChange}
+                      setDate={(selected) => {
+                        console.log("Time picker date selected:", selected);
+                        field.onChange(selected);
+                      }}
                       date={field.value}
                     />
                   </div>
