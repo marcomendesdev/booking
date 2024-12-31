@@ -76,10 +76,12 @@ export function TablesClient({ tables, bookings }: TablesClientProps) {
         {tables.map((table) => (
           <li key={table.id}>
             <TableCard
+              tableId={table.id.toString()}
               name={table.name}
               capacity={table.capacity}
               location={table.location}
               status={isTableBooked(table.id, date) ? "Reserved" : "Available"}
+              selectedDate={new Date(date)}
             />
           </li>
         ))}
