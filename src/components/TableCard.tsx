@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -36,17 +38,16 @@ export function TableCard({
     }
 
     setIsBooking(true);
-    const newBookingId = `B${Date.now()}`;
 
     try {
-      const response = await fetch("https://67631d5e17ec5852cae823fa.mockapi.io/api/tables/bookings", {
+      const response = await fetch("/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: newBookingId,
-          tableId: tableId,
+          id: `B${Date.now()}`,
+          tableId,
           date: selectedDate,
           customerName: "Default Customer",
           contactInfo: "default.contact@example.com",
@@ -58,7 +59,8 @@ export function TableCard({
         throw new Error("Failed to create booking.");
       }
 
-      alert("Table booked successfully!");
+      const result = await response.json();
+      alert(result.message);
     } catch (error) {
       console.error("Error booking table:", error);
       alert("Failed to book table. Please try again.");
