@@ -20,6 +20,8 @@ type TableCardProps = {
   status: string;
   selectedDate: Date | null;
   onBookingSuccess: () => void;
+  primaryEmail: string;
+  fullName: string;
 };
 
 export function TableCard({
@@ -30,7 +32,9 @@ export function TableCard({
   status,
   selectedDate,
   onBookingSuccess,
-  dateSelected, // Add this prop
+  dateSelected,
+  primaryEmail,
+  fullName,
 }: TableCardProps & { dateSelected: boolean }) {
   const [isBooking, setIsBooking] = useState(false);
 
@@ -52,8 +56,8 @@ export function TableCard({
           id: `B${Date.now()}`,
           tableId,
           date: selectedDate,
-          customerName: "Default Customer",
-          contactInfo: "default.contact@example.com",
+          customerName: fullName,
+          contactInfo: primaryEmail,
           status: "Reserved",
         }),
       });
@@ -87,14 +91,20 @@ export function TableCard({
         <p>Location: {location}</p>
       </CardContent>
       <CardFooter>
-        {status === "Available" && dateSelected ? ( // Conditionally render the button
-          <Button className="w-full" onClick={handleBooking} disabled={isBooking}>
+        {status === "Available" && dateSelected ? (
+          <Button
+            className="w-full"
+            onClick={handleBooking}
+            disabled={isBooking}
+          >
             {isBooking ? "Booking..." : "Book this table"}
           </Button>
-        ) : dateSelected && (
-          <Button className="w-full" disabled>
-            {status === "Available" ? "Select a date" : "Reserved"}
-          </Button>
+        ) : (
+          dateSelected && (
+            <Button className="w-full" disabled>
+              {status === "Available" ? "Select a date" : "Reserved"}
+            </Button>
+          )
         )}
       </CardFooter>
     </Card>

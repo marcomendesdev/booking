@@ -6,7 +6,12 @@ import { TableCard } from "@/components/TableCard";
 import { formatISO } from "date-fns";
 import { useState, useEffect, useCallback } from "react";
 
-export function TablesClient() {
+type TablesClientProps = {
+  primaryEmail: string;
+  fullName: string;
+};
+
+export function TablesClient({ primaryEmail, fullName }: TablesClientProps) {
   const { tables, bookings, refreshTables } = useTables();
   const [date, setDate] = useState<string | null>(null);
 
@@ -17,7 +22,7 @@ export function TablesClient() {
   const isTableBooked = useCallback((tableId: number, bookingDate: string): boolean => {
     const result = bookings.some((book) => {
       const bookingDateTime = new Date(book.date).getTime();
-      const bookingEndTime = bookingDateTime + 60 * 60 * 1000; // 1 hour after booking time
+      const bookingEndTime = bookingDateTime + 60 * 60 * 1000; 
       const nowTime = new Date(bookingDate).getTime();
       const isBooked =
         book.tableId === tableId &&
@@ -61,7 +66,9 @@ export function TablesClient() {
               status={date && isTableBooked(table.id, date) ? "Reserved" : "Available"}
               selectedDate={date ? new Date(date) : null}
               onBookingSuccess={refreshTables}
-              dateSelected={!!date} // Pass the dateSelected prop
+              dateSelected={!!date} 
+              primaryEmail={primaryEmail}
+              fullName={fullName}
             />
           </li>
         ))}
