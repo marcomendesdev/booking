@@ -42,6 +42,15 @@ export default function Header() {
           >
             Contact
           </Link>
+          <SignedIn>
+            <Link
+              href="/my-bookings"
+              className="text-sm font-medium hover:underline underline-offset-4"
+              prefetch={false}
+            >
+              My Bookings
+            </Link>
+          </SignedIn>
         </nav>
         <div className="ml-auto flex items-center space-x-4">
           <Button>
@@ -91,6 +100,13 @@ export default function Header() {
                   prefetch={false}
                 >
                   Contact
+                </Link>
+                <Link
+                  href="/my-bookings"
+                  className="text-sm font-medium hover:underline underline-offset-4"
+                  prefetch={false}
+                >
+                  My Bookings
                 </Link>
               </div>
             </SheetContent>

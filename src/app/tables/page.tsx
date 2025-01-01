@@ -5,9 +5,13 @@ import { currentUser } from "@clerk/nextjs/server";
 export default async function Tables() {
   const user = await currentUser();
 
+  if (!user) {
+    return <div>User not found</div>;
+  }
+
   const primaryEmail = user.emailAddresses.find(
     (email) => email.id === user.primaryEmailAddressId
-  )?.emailAddress;
+  )?.emailAddress || "default@example.com";
 
   const fullName = user.firstName + " " + user.lastName;
 
