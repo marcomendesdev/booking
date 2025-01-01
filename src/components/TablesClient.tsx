@@ -4,7 +4,7 @@ import { useTables } from "@/context/TablesContext";
 import { DateTimePickerForm } from "@/components/Date-Picker";
 import { TableCard } from "@/components/TableCard";
 import { formatISO } from "date-fns";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export function TablesClient() {
   const { tables, bookings, refreshTables } = useTables();
@@ -18,7 +18,7 @@ export function TablesClient() {
     console.log("Current selected date:", date);
   }, [date]);
 
-  const isTableBooked = (tableId: number, bookingDate: string): boolean => {
+  const isTableBooked = useCallback((tableId: number, bookingDate: string): boolean => {
     const result = bookings.some((book) => {
       const bookingDateTime = new Date(book.date).getTime();
       const bookingEndTime = bookingDateTime + 60 * 60 * 1000; // 1 hour after booking time
@@ -35,7 +35,7 @@ export function TablesClient() {
       return isBooked;
     });
     return result;
-  };
+  }, [bookings]);
 
   const handleDateChange = (selectedDate: Date | null) => {
     if (selectedDate) {

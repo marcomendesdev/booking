@@ -1,6 +1,8 @@
+// src/context/TablesContext.tsx
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { fetchTablesAndBookings } from "@/services/tablesService";
 
 type Table = {
   id: number;
@@ -30,24 +32,18 @@ export const TablesProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [tables, setTables] = useState<Table[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
 
-  const fetchTablesAndBookings = useCallback(async () => {
-    const [tablesRes, bookingsRes] = await Promise.all([
-      fetch("https://67631d5e17ec5852cae823fa.mockapi.io/api/tables/restaurant-tables"),
-      fetch("https://67631d5e17ec5852cae823fa.mockapi.io/api/tables/bookings"),
-    ]);
-
-    const [tables, bookings] = await Promise.all([tablesRes.json(), bookingsRes.json()]);
-
+  const fetchAndSetTablesAndBookings = useCallback(async () => {
+    const { tables, bookings } = await fetchTablesAndBookings();
     setTables(tables);
     setBookings(bookings);
   }, []);
 
   useEffect(() => {
-    fetchTablesAndBookings();
-  }, [fetchTablesAndBookings]);
+    fetchAndSetTablesAndBookings();
+  }, [fetchAndSetTablesAndBookings]);
 
   const refreshTables = () => {
-    fetchTablesAndBookings();
+    fetchAndSetTablesAndBookings();
   };
 
   return (
