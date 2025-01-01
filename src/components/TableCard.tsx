@@ -30,7 +30,8 @@ export function TableCard({
   status,
   selectedDate,
   onBookingSuccess,
-}: TableCardProps) {
+  dateSelected, // Add this prop
+}: TableCardProps & { dateSelected: boolean }) {
   const [isBooking, setIsBooking] = useState(false);
 
   const handleBooking = async () => {
@@ -86,13 +87,13 @@ export function TableCard({
         <p>Location: {location}</p>
       </CardContent>
       <CardFooter>
-        {status === "Available" ? (
+        {status === "Available" && dateSelected ? ( // Conditionally render the button
           <Button className="w-full" onClick={handleBooking} disabled={isBooking}>
             {isBooking ? "Booking..." : "Book this table"}
           </Button>
-        ) : (
+        ) : dateSelected && (
           <Button className="w-full" disabled>
-            Reserved
+            {status === "Available" ? "Select a date" : "Reserved"}
           </Button>
         )}
       </CardFooter>

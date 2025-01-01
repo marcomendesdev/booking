@@ -8,11 +8,7 @@ import { useState, useEffect, useCallback } from "react";
 
 export function TablesClient() {
   const { tables, bookings, refreshTables } = useTables();
-  const [date, setDate] = useState<string>(() => {
-    const now = new Date();
-    now.setSeconds(0, 0);
-    return formatISO(now);
-  });
+  const [date, setDate] = useState<string | null>(null);
 
   useEffect(() => {
     console.log("Current selected date:", date);
@@ -44,6 +40,7 @@ export function TablesClient() {
       setDate(formattedDate);
     } else {
       console.log("No date selected.");
+      setDate(null);
     }
   };
 
@@ -61,9 +58,10 @@ export function TablesClient() {
               name={table.name}
               capacity={table.capacity}
               location={table.location}
-              status={isTableBooked(table.id, date) ? "Reserved" : "Available"}
-              selectedDate={new Date(date)}
+              status={date && isTableBooked(table.id, date) ? "Reserved" : "Available"}
+              selectedDate={date ? new Date(date) : null}
               onBookingSuccess={refreshTables}
+              dateSelected={!!date} // Pass the dateSelected prop
             />
           </li>
         ))}
