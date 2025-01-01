@@ -5,7 +5,7 @@ import BookingsList from "@/components/BookingsList";
 import { DateTimePickerForm } from "@/components/Date-Picker";
 
 interface MyBookingsClientProps {
-  bookings: { id: string; customerName: string; date: string; [key: string]: unknown }[]; // Replace with the appropriate type if known
+  bookings: { id: string; customerName: string; date: string; tableId: string; contactInfo: string; status: string }[];
 }
 
 export default function MyBookingsClient({ bookings }: MyBookingsClientProps) {
@@ -16,11 +16,13 @@ export default function MyBookingsClient({ bookings }: MyBookingsClientProps) {
   };
 
   return (
-    <div>
-      <h1>My Bookings</h1>
-      <DateTimePickerForm onDateChange={handleDateChange} />
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">My Bookings</h1>
+      <div className="mb-4">
+        <DateTimePickerForm onDateChange={handleDateChange} />
+      </div>
       <div>
-        <h2>Existing Bookings</h2>
+        <h2 className="text-xl font-semibold mb-2">Existing Bookings</h2>
         <BookingsList bookings={bookings} selectedDate={selectedDate} />
       </div>
     </div>

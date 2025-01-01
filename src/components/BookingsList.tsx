@@ -1,12 +1,12 @@
-'use client';
-
-import { useState } from 'react';
+import { useState } from "react";
 
 interface Booking {
   id: string;
   customerName: string;
   date: string;
-  status?: string;
+  tableId: string;
+  contactInfo: string;
+  status: string;
 }
 
 interface BookingsListProps {
@@ -52,10 +52,14 @@ export default function BookingsList({ bookings, selectedDate }: BookingsListPro
   return (
     <ul>
       {bookingList.map((booking) => (
-        <li key={booking.id}>
-          {booking.customerName} - {booking.date}
-          <button onClick={() => handleUpdate(booking.id)}>Update</button>
-          <button onClick={() => handleDelete(booking.id)}>Delete</button>
+        <li key={booking.id} className="border p-4 mb-2 rounded">
+          <div><strong>Customer Name:</strong> {booking.customerName}</div>
+          <div><strong>Date:</strong> {new Date(booking.date).toLocaleString()}</div>
+          <div><strong>Table ID:</strong> {booking.tableId}</div>
+          <div><strong>Contact Info:</strong> {booking.contactInfo}</div>
+          <div><strong>Status:</strong> {booking.status}</div>
+          <button onClick={() => handleUpdate(booking.id)} className="mr-2 bg-blue-500 text-white px-2 py-1 rounded">Update</button>
+          <button onClick={() => handleDelete(booking.id)} className="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
         </li>
       ))}
     </ul>
