@@ -1,32 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useTables } from "@/context/TablesContext";
 import { DateTimePickerForm } from "@/components/Date-Picker";
 import { TableCard } from "@/components/TableCard";
 import { formatISO } from "date-fns";
+import { useState, useEffect } from "react";
 
-type Table = {
-  id: number;
-  name: string;
-  capacity: number;
-  location: string;
-  status: string;
-};
-
-type Booking = {
-  id: number;
-  tableId: number;
-  customerName: string;
-  contactInfo: string;
-  date: string;
-};
-
-type TablesClientProps = {
-  tables: Table[];
-  bookings: Booking[];
-};
-
-export function TablesClient({ tables, bookings }: TablesClientProps) {
+export function TablesClient() {
+  const { tables, bookings, refreshTables } = useTables();
   const [date, setDate] = useState<string>(() => {
     const now = new Date();
     now.setSeconds(0, 0);
@@ -82,6 +63,7 @@ export function TablesClient({ tables, bookings }: TablesClientProps) {
               location={table.location}
               status={isTableBooked(table.id, date) ? "Reserved" : "Available"}
               selectedDate={new Date(date)}
+              onBookingSuccess={refreshTables}
             />
           </li>
         ))}

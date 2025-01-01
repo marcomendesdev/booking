@@ -19,6 +19,7 @@ type TableCardProps = {
   location: string;
   status: string;
   selectedDate: Date | null;
+  onBookingSuccess: () => void;
 };
 
 export function TableCard({
@@ -28,6 +29,7 @@ export function TableCard({
   location,
   status,
   selectedDate,
+  onBookingSuccess,
 }: TableCardProps) {
   const [isBooking, setIsBooking] = useState(false);
 
@@ -61,6 +63,7 @@ export function TableCard({
 
       const result = await response.json();
       alert(result.message);
+      onBookingSuccess();
     } catch (error) {
       console.error("Error booking table:", error);
       alert("Failed to book table. Please try again.");
