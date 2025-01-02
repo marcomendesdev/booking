@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function POST(request: { json: () => unknown; }) {
+export async function POST(request: NextRequest) {
   const body = await request.json();
 
   const response = await fetch("https://67631d5e17ec5852cae823fa.mockapi.io/api/tables/bookings", {
@@ -18,7 +18,7 @@ export async function POST(request: { json: () => unknown; }) {
   return NextResponse.json({ message: "Table booked successfully!" });
 }
 
-export async function PUT(request: { json: () => unknown; url: string; }) {
+export async function PUT(request: NextRequest) {
   const body = await request.json();
   const id = new URL(request.url).searchParams.get("id");
 
@@ -37,11 +37,14 @@ export async function PUT(request: { json: () => unknown; url: string; }) {
   return NextResponse.json({ message: "Booking updated successfully!" });
 }
 
-export async function DELETE(request: { url: string; }) {
+export async function DELETE(request: NextRequest) {
   const id = new URL(request.url).searchParams.get("id");
 
   const response = await fetch(`https://67631d5e17ec5852cae823fa.mockapi.io/api/tables/bookings/${id}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 
   if (!response.ok) {
