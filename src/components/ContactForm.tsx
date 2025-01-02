@@ -13,7 +13,7 @@ export default function ContactForm() {
           Please fill the below form and we will get back to you as soon as possible.
         </p>
       </div>
-      <div className="space-y-4">
+         <div className="space-y-4">
         <div className="space-y-2">
           <Label className="text-gray-600 dark:text-gray-400 required" htmlFor="name">
             Name
@@ -32,7 +32,7 @@ export default function ContactForm() {
             </Label>
             <div className="border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 w-full">
               <Select>
-                <SelectTrigger id="prefix">
+                <SelectTrigger id="prefix" required>
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent>
