@@ -1,4 +1,3 @@
-
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from "@/components/ui/select"
@@ -31,80 +30,67 @@ export default function ContactForm() {
             <Label className="text-gray-600 dark:text-gray-400 required" htmlFor="prefix">
               Prefix
             </Label>
-            <Select
-              className="border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 w-full"
-              id="prefix"
-              required
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select a prefix" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="+1">
-                    <img
-                      alt="US Flag"
-                      className="inline-block mr-2"
-                      height={20}
-                      src="/placeholder.svg"
-                      style={{ aspectRatio: "20/20", objectFit: "cover" }}
-                      width={20}
-                    />
-                    (+1)
-                  </SelectItem>
-                  <SelectItem value="+44">
-                    <img
-                      alt="UK Flag"
-                      className="inline-block mr-2"
-                      height={20}
-                      src="/placeholder.svg"
-                      style={{ aspectRatio: "20/20", objectFit: "cover" }}
-                      width={20}
-                    />
-                    (+44)
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <div className="border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 w-full">
+              <Select id="prefix" required>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="mr">Mr.</SelectItem>
+                    <SelectItem value="ms">Ms.</SelectItem>
+                    <SelectItem value="mrs">Mrs.</SelectItem>
+                    <SelectItem value="dr">Dr.</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
-          <div className="w-3/4 space-y-2">
-            <Label className="text-gray-600 dark:text-gray-400 required" htmlFor="phone">
-              Phone Number
+          <div className="w-11/12 space-y-2">
+            <Label className="text-gray-600 dark:text-gray-400 required" htmlFor="surname">
+              Surname
             </Label>
             <Input
               className="border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800"
-              id="phone"
-              placeholder="Enter your phone number"
+              id="surname"
+              placeholder="Enter your surname"
               required
             />
           </div>
         </div>
         <div className="space-y-2">
+          <Label className="text-gray-600 dark:text-gray-400 required" htmlFor="email">
+            Email
+          </Label>
+          <Input
+            className="border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800"
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div className="space-y-2">
           <Label className="text-gray-600 dark:text-gray-400 required" htmlFor="message">
             Message
           </Label>
-          <textarea
-            className="border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 w-full p-2"
-            defaultValue="I would like to receive more information"
+          <Input
+            className="border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800"
             id="message"
-            placeholder="Type your message"
+            placeholder="Enter your message"
             required
-            rows={4}
           />
         </div>
-        <div className="flex items-center space-x-2">
-          <Checkbox className="text-gray-600 dark:text-gray-400" id="agreement" required />
-          <Label className="text-sm font-normal text-gray-600 dark:text-gray-400" htmlFor="agreement">
-            I agree to the
-            <button className="underline underline-offset-2 text-gray-600 dark:text-gray-400">
-              Terms & Conditions
-            </button>
+        <div className="space-y-2">
+          <Checkbox id="subscribe" />
+          <Label className="text-gray-600 dark:text-gray-400" htmlFor="subscribe">
+            Subscribe to our newsletter
           </Label>
         </div>
-        <Button className="w-full bg-gray-300 dark:bg-gray-700 text-black dark:text-white" type="submit">
+        <Button type="submit" className="bg-blue-500 text-white">
           Submit
         </Button>
       </div>
     </div>
-  )
+  );
 }
