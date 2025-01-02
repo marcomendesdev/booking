@@ -13,7 +13,7 @@ export default function ContactForm() {
           Please fill the below form and we will get back to you as soon as possible.
         </p>
       </div>
-         <div className="space-y-4">
+      <div className="space-y-4">
         <div className="space-y-2">
           <Label className="text-gray-600 dark:text-gray-400 required" htmlFor="name">
             Name
