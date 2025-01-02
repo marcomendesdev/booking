@@ -31,8 +31,8 @@ export default function ContactForm() {
               Prefix
             </Label>
             <div className="border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 w-full">
-              <Select id="prefix" required>
-                <SelectTrigger>
+              <Select>
+                <SelectTrigger id="prefix">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent>
