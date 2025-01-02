@@ -1,4 +1,8 @@
-import { ClerkProvider } from '@clerk/nextjs';
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import {
+  ClerkProvider
+} from '@clerk/nextjs'
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
@@ -10,15 +14,10 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = GeistMono({
+const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-interface Metadata {
-  title: string;
-  description: string;
-}
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,32 +29,30 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
+  
   return (
-    <ClerkProvider publishableKey={clerkPublishableKey}>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <ClerkProvider >
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          <ThemeProvider>
-            <Header />
-            {children}
-            <Footer />
+          <Header />
+          <div className="grid items-center justify-items-center min-h-screen pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
+            <main className="flex flex-col gap-8 justtify-items-center items-center sm:items-start">
+              {children}
+            </main>
             <Toaster />
-          </ThemeProvider>
-        </body>
-      </html>
+          </div>
+          <Footer />
+        </ThemeProvider>
+      </body>
+    </html>
     </ClerkProvider>
   );
-}
-
-function Geist(arg0: { variable: string; subsets: string[]; }) {
-  // Implement the function logic here
-  return arg0;
-}
-
-function GeistMono(arg0: { variable: string; subsets: string[]; }) {
-  // Implement the function logic here
-  return arg0;
 }
