@@ -53,7 +53,7 @@ export function TablesClient({ primaryEmail, fullName }: TablesClientProps) {
     <div className="px-6">
       <h1 className="text-2xl font-bold py-10">Tables</h1>
       <div className="pb-6">
-        <DateTimePickerForm onDateChange={handleDateChange} />
+        <DateTimePickerForm onDateChange={handleDateChange} label="Choose a date to book your table:" buttonText="Check" />
       </div>
       <ul className="grid sm:grid-cols-3 gap-4">
         {tables.map((table) => (

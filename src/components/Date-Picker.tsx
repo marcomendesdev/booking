@@ -30,9 +30,11 @@ type FormSchemaType = z.infer<typeof formSchema>;
 
 type DateTimePickerFormProps = {
   onDateChange: (selectedDate: Date | null) => void;
+  label?: string;
+  buttonText?: string;
 };
 
-export function DateTimePickerForm({ onDateChange }: DateTimePickerFormProps) {
+export function DateTimePickerForm({ onDateChange, label, buttonText }: DateTimePickerFormProps) {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
   });
@@ -54,7 +56,7 @@ export function DateTimePickerForm({ onDateChange }: DateTimePickerFormProps) {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel className="text-left">
-                Choose a date to book your table:
+                {label}
               </FormLabel>
               <Popover>
                 <FormControl>
@@ -99,7 +101,7 @@ export function DateTimePickerForm({ onDateChange }: DateTimePickerFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{buttonText}</Button>
       </form>
     </Form>
   );

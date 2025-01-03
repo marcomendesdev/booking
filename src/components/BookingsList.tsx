@@ -50,7 +50,7 @@ export default function BookingsList({ bookings, selectedDate }: BookingsListPro
   };
 
   return (
-    <ul>
+    <ul className="grid sm:grid-cols-3 gap-4">
       {bookingList.map((booking) => (
         <li key={booking.id} className="border p-4 mb-2 rounded">
           <div><strong>Customer Name:</strong> {booking.customerName}</div>

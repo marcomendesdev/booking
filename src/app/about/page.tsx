@@ -1,8 +1,8 @@
 export default function AboutUs() {
   return (
-    <div className="flex flex-col items-center justify-center w-1/2 mx-auto">
+    <div className="flex flex-col items-center justify-center sm:w-1/2 mx-auto px-8">
       <h1 className="text-3xl font-black pb-11">About Us</h1>
-      <div>
+      <div className="text-center">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur
         provident dignissimos minus accusamus odit, error laboriosam velit
         repudiandae. Eos ipsa, natus debitis nam a adipisci amet aliquid rem

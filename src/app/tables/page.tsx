@@ -15,8 +15,6 @@ export default async function Tables() {
 
   const fullName = user.firstName + " " + user.lastName;
 
-  console.log({ user, primaryEmail, fullName });
-
   return (
     <TablesProvider>
       <TablesClient primaryEmail={primaryEmail} fullName={fullName} />

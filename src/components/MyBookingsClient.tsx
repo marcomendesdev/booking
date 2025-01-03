@@ -19,7 +19,7 @@ export default function MyBookingsClient({ bookings }: MyBookingsClientProps) {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">My Bookings</h1>
       <div className="mb-4">
-        <DateTimePickerForm onDateChange={handleDateChange} />
+        <DateTimePickerForm onDateChange={handleDateChange} label="Pick a date to update your bookings:" buttonText="Confirm" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-2">Existing Bookings</h2>
